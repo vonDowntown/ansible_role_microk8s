@@ -186,20 +186,6 @@
   changed_when: "'Addon dashboard is already disabled' not in command_result.stdout"
   when: not microk8s_plugin_dashboard_enable
 
-- name: Enable fluentd
-  become: yes
-  command: "microk8s.enable fluentd"
-  register: command_result
-  changed_when: "'Addon fluentd is already enabled' not in command_result.stdout"
-  when: microk8s_plugin_fluentd_enable
-
-- name: Disable fluentd
-  become: yes
-  command: "microk8s.disable fluentd"
-  register: command_result
-  changed_when: "'Addon fluentd is already disabled' not in command_result.stdout"
-  when: not microk8s_plugin_fluentd_enable
-
 - name: Enable prometheus
   become: yes
   command: "microk8s.enable prometheus"
