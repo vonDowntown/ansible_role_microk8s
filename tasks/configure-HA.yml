@@ -34,11 +34,13 @@
     delegate_facts: true
     changed_when: false
     register: microk8s_cluster_node
-
   - name: Waiting for microk8s to be ready on microk8s host node
     command: "microk8s status --wait-ready"
     changed_when: false
-
+  - name: log command
+    ansible.builtin.debug:
+      msg:  "{{ microk8s_join_command.stdout }} --skip-verify"
+    run_once: yes
   - name: Set the microk8s join command on the microk8s node
     command: "{{ microk8s_join_command.stdout }} --skip-verify"
     when: microk8s_cluster_node.stdout.find(inventory_hostname) == -1
