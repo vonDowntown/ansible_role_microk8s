@@ -40,7 +40,7 @@
     changed_when: false
 
   - name: Set the microk8s join command on the microk8s node
-    command: "{{ microk8s_join_command.stdout }}"
+    command: "{{ microk8s_join_command.stdout }} --skip-verify"
     when: microk8s_cluster_node.stdout.find(inventory_hostname) == -1
 
   when: inventory_hostname != designated_host
