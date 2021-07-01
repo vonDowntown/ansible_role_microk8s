@@ -58,17 +58,3 @@
     loop_var: user
     label: '{{ user }}'
   when: microk8s_plugin_helm3_enable
-
-- name: update helm repos
-  become: yes
-  become_user: '{{ user }}'
-  community.kubernetes.helm:
-    name: stable
-    state: absent
-    namespace: default
-    update_repo_cache: yes
-  with_items: '{{ users }}'
-  loop_control:
-    loop_var: user
-    label: '{{ user }}'
-  when: microk8s_plugin_helm3_enable
